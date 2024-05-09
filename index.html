@@ -13,23 +13,28 @@
     <main class="section">
       <div class="container">
         <h1 class="title">Test</h1>
-        <form class="form">
-          <label class="form-field field">
+        <form class="form" id="form">
+          <label class="form-field field invalid">
             <span class="input-title">Name/Value Pair</span>
-            <input type="text" />
+            <input name="data" type="text" />
+            <p class="form-error">Invalid data</p>
           </label>
           <button class="button" type="submit">Add</button>
         </form>
         <div class="wrapper">
           <label class="resulte-field field">
             <span class="input-title">Name/Value Pair List</span>
-            <textarea name="" id="" cols="40" rows="10" readonly> </textarea>
+            <textarea id="data" cols="40" rows="15" readonly> </textarea>
           </label>
           <div class="actions">
             <button class="button" id="sortByName">Sort by Name</button>
             <button class="button" id="sortByValue">Sort by Value</button>
-            <button class="button" id="delete">delete</button>
-            <button class="button" id="showXml">Show XML</button>
+            <button class="button" id="delete">Delete</button>
+            <label class="button">
+              <input class="button-delete" type="checkbox" id="delete" />
+              <span class="button-xml">Show XML </span>
+              <span class="button-object">Show Object</span>
+            </label>
           </div>
         </div>
       </div>
