@@ -3,9 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
   </head>
   <body>
+    <main class="section">
+      <div class="container">
+        <h1 class="title">Test</h1>
+        <form class="form">
+          <label class="form-field field">
+            <span class="input-title">Name/Value Pair</span>
+            <input type="text" />
+          </label>
+          <button class="button" type="submit">Add</button>
+        </form>
+        <div class="wrapper">
+          <label class="resulte-field field">
+            <span class="input-title">Name/Value Pair List</span>
+            <textarea name="" id="" cols="40" rows="10" readonly> </textarea>
+          </label>
+          <div class="actions">
+            <button class="button" id="sortByName">Sort by Name</button>
+            <button class="button" id="sortByValue">Sort by Value</button>
+            <button class="button" id="delete">delete</button>
+            <button class="button" id="showXml">Show XML</button>
+          </div>
+        </div>
+      </div>
+    </main>
     <script type="module" src="./index.js"></script>
   </body>
 </html>
