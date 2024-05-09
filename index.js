@@ -28,6 +28,7 @@ function onSubmit(e) {
     setPairs(pairs);
     renderList(pairs);
     inputLabel.classList.remove(INVALID);
+    e.currentTarget.reset();
   } else {
     inputLabel.classList.add(INVALID);
   }
@@ -53,13 +54,13 @@ function onChangeFormat(e) {
   setIsXml(checked);
   renderList(getPairs());
 }
-// EVENTS
-
+// EVENTS END
+startApp();
 // read data from LS
 function startApp() {
   const pairs = getPairs();
   parseBtn.checked = getIsXml();
-  if (pairs.length) showDataInput = renderList(pairs);
+  if (pairs.length) renderList(pairs);
 }
 
 function validate(value) {
