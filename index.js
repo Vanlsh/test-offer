@@ -22,6 +22,13 @@ parseBtn.addEventListener("input", onchange);
 function onSubmit(e) {
   e.preventDefault();
   const { value } = e.currentTarget.elements.data;
+  const regex = /^[\w\d]+\s*=\s*[\w\d]+$/;
+
+  if (regex.test(value)) {
+    console.log("Format is correct!");
+  } else {
+    console.log("Format is incorrect. Names and values should contain only alpha-numeric characters.");
+  }
 }
 function onSortByName() {}
 function onSortByValue() {}
