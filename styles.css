@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+}
+button {
+  display: block;
+}
+body {
+  background-color: #6e6ed7;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+
+  margin: 0;
+  padding: 0;
+}
+
+.section {
+  padding: 100px 20px;
+}
+.container {
+  max-width: 768px;
+
+  padding: 40px 30px;
+  margin: 0 auto;
+
+  border-radius: 15px;
+
+  background-color: #ffffff;
+}
+
+.title {
+  margin: 0 0 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.input-title {
+  font-size: 12px;
+  color: #7e7f81;
+}
+
+.form-field input {
+  font-family: inherit;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.resulte-field textarea {
+  padding: 10px;
+  resize: none;
+  font-family: inherit;
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Common */
+
+.field {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.button {
+  padding: 10px 20px;
+  width: 100%;
+  border: none;
+
+  font-family: inherit;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #6e6ed7;
+
+  cursor: pointer;
+}
+
+@media screen and (min-width: 425px) {
+  .actions button {
+    width: fit-content;
+  }
+  .actions .button:not(:first-child) {
+    margin-right: 10px;
+  }
+
+  .actions .button#sortByValue {
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 30px;
+  }
+  .wrapper {
+    flex-direction: row;
+  }
+  .actions {
+    flex-direction: column;
+    margin-top: 16px;
+    margin-left: 30px;
+  }
+  .actions .button {
+    width: 100%;
+    margin-right: 0;
+  }
+  .actions .button:not(:first-child) {
+    margin-bottom: 10px;
+  }
+
+  .actions .button#sortByValue {
+    margin-bottom: 20px;
+  }
+  .actions .button#delete {
+    margin-bottom: 20px;
+  }
+  /* Common */
+  .field {
+    max-width: 500px;
+  }
+  .button {
+    width: fit-content;
+  }
+}
