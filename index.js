@@ -109,10 +109,10 @@ function getIndexesRangePair({ value, selectionStart, selectionEnd }) {
     }
     //  if we select only end teg </data>
     if (pairEndIndexes.at(-1) <= selectionStart) return null;
-    const lastItem =
+    const lastPair =
       pairEndIndexes[pairEndIndexes.length - 1] + pairLengths.at(-1) - 1;
 
-    pairEndIndexes[pairEndIndexes.length - 1] = lastItem;
+    pairEndIndexes[pairEndIndexes.length - 1] = lastPair;
   } else {
     pairEndIndexes = pairLengths.reduce(
       (acc, nextPair) => [...acc, acc.at(-1) + nextPair || nextPair],
