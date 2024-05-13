@@ -63,6 +63,31 @@ function onDelete() {
   renderList(pairs);
 }
 
+function onChangeFormat(e) {
+  const { checked } = e.currentTarget;
+  setIsXml(checked);
+  renderList(getPairs());
+}
+// EVENTS END
+startApp();
+// read data from LS
+function startApp() {
+  const pairs = getPairs();
+  parseBtn.checked = getIsXml();
+  if (pairs.length) renderList(pairs);
+}
+
+function validate(value) {
+  const regex = /^\s*[\w\d]+\s*=\s*[\w\d]+\s*$/;
+  return regex.test(value);
+}
+
+function parsePair(text) {
+  const [key, value] = text.split("=");
+  return { key: key.trim(), value: value.trim() };
+}
+
+// A function that returns the range of indexes of lines that were selected
 function getIndexesRangePair({ value, selectionStart, selectionEnd }) {
   const pairLengths = value
     .trim()
@@ -99,30 +124,6 @@ function getIndexesRangePair({ value, selectionStart, selectionEnd }) {
   const endIndex = pairEndIndexes.findIndex((item) => item >= selectionEnd);
 
   return { startIndex, endIndex };
-}
-
-function onChangeFormat(e) {
-  const { checked } = e.currentTarget;
-  setIsXml(checked);
-  renderList(getPairs());
-}
-// EVENTS END
-startApp();
-// read data from LS
-function startApp() {
-  const pairs = getPairs();
-  parseBtn.checked = getIsXml();
-  if (pairs.length) renderList(pairs);
-}
-
-function validate(value) {
-  const regex = /^\s*[\w\d]+\s*=\s*[\w\d]+\s*$/;
-  return regex.test(value);
-}
-
-function parsePair(text) {
-  const [key, value] = text.split("=");
-  return { key: key.trim(), value: value.trim() };
 }
 
 function renderList(pairs) {
