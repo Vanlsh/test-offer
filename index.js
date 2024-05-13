@@ -47,29 +47,24 @@ function onSortByValue() {
 }
 
 function onDelete() {
-  console.log(showDataInput.selectionStart);
-  console.log(showDataInput.selectionEnd);
-  console.log(showDataInput.value.length);
   const { value, selectionStart, selectionEnd } = showDataInput;
   if (selectionStart == selectionEnd) return;
 
-  const range = getLengthOfStrings({ value, selectionStart, selectionEnd });
+  const range = getIndexesRangePair({ value, selectionStart, selectionEnd });
 
   if (!range) return;
+
   const { startIndex, endIndex } = range;
-  console.log("startIndex", startIndex);
-  console.log("endIndex", endIndex);
 
   const pairs = getPairs();
   pairs.splice(startIndex, endIndex - startIndex + 1);
-  console.log(pairs);
+
   setPairs(pairs);
   renderList(pairs);
 }
 
-function getLengthOfStrings({ value, selectionStart, selectionEnd }) {
-  console.log({ value: value.trim() });
-  const pairLengthes = value
+function getIndexesRangePair({ value, selectionStart, selectionEnd }) {
+  const pairLengths = value
     .trim()
     .split("\n")
     .map((pair) => pair.length + 1);
@@ -77,32 +72,32 @@ function getLengthOfStrings({ value, selectionStart, selectionEnd }) {
   const isXml = getIsXml();
 
   let pairEndIndexes = [];
-  let startIndex = 0;
-  let endIndex = 0;
 
   if (isXml) {
-    let counter = pairLengthes[0];
-    console.log(counter + " selectionEnd -> " + selectionEnd);
-    console.log(counter >= selectionEnd);
+    let counter = pairLengths[0];
+    //  if we select only start teg <data>
     if (counter >= selectionEnd) return null;
 
-    for (let i = 1; i < pairLengthes.length - 1; i++) {
-      counter += pairLengthes[i];
+    for (let i = 1; i < pairLengths.length - 1; i++) {
+      counter += pairLengths[i];
       pairEndIndexes.push(counter);
     }
-    console.log(pairEndIndexes.at(-1) + "" + selectionStart);
+    //  if we select only end teg </data>
     if (pairEndIndexes.at(-1) <= selectionStart) return null;
-    const lastItem = pairEndIndexes[pairEndIndexes.length - 1] + pairLengthes.at(-1) - 1;
+    const lastItem =
+      pairEndIndexes[pairEndIndexes.length - 1] + pairLengths.at(-1) - 1;
 
     pairEndIndexes[pairEndIndexes.length - 1] = lastItem;
   } else {
-    pairEndIndexes = pairLengthes.reduce((acc, nextPair) => [...acc, acc.at(-1) + nextPair || nextPair], []);
+    pairEndIndexes = pairLengths.reduce(
+      (acc, nextPair) => [...acc, acc.at(-1) + nextPair || nextPair],
+      []
+    );
   }
-  // console.log(pairEndIndexes);
-  startIndex = pairEndIndexes.findIndex((item) => item > selectionStart);
-  endIndex = pairEndIndexes.findIndex((item) => item >= selectionEnd);
-  // console.log(startIndex);
-  // console.log(endIndex);
+
+  const startIndex = pairEndIndexes.findIndex((item) => item > selectionStart);
+  const endIndex = pairEndIndexes.findIndex((item) => item >= selectionEnd);
+
   return { startIndex, endIndex };
 }
 
@@ -144,7 +139,10 @@ function renderList(pairs) {
 }
 
 function makeXml(pairs) {
-  const text = pairs.reduce((acc, { key, value }) => (acc += `  <${key}>${value}</${key}>\n`), "");
+  const text = pairs.reduce(
+    (acc, { key, value }) => (acc += `  <${key}>${value}</${key}>\n`),
+    ""
+  );
   return "<data>\n" + text + "</data>";
 }
 
@@ -153,19 +151,14 @@ function makeSimplePairs(pairs) {
 }
 
 function sortPairs(pairs, type) {
-  const sortedPairs = pairs.toSorted((firstPair, secondPair) => firstPair[type].localeCompare(secondPair[type]));
+  const sortedPairs = pairs.toSorted((firstPair, secondPair) =>
+    firstPair[type].localeCompare(secondPair[type])
+  );
   setPairs(sortedPairs);
   return sortedPairs;
 }
 
 // Local Storage
-setPairs([
-  { key: "T1111", value: "2222" },
-  { key: "323232", value: "1111111" },
-  { key: "7777", value: "56565" },
-  { key: "2324", value: "5555" },
-  { key: "43534", value: "546546" },
-]);
 function getPairs() {
   return getFromLS(DATA_KEY_LS) || [];
 }
